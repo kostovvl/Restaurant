@@ -97,6 +97,16 @@ public class ProductService {
         );
     }
 
+    public String deleteProduct(long productId) {
+
+        String productName = this.productRepository.findById(productId).orElse(null).getName();
+
+        this.productRepository.deleteById(productId);
+
+        return productName;
+
+    }
+
 
 
 
@@ -105,6 +115,7 @@ public class ProductService {
     private boolean productExists(String name) {
         return this.productRepository.findByName(name).orElse(null) != null;
     }
+
 
 
 

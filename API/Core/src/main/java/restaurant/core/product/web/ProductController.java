@@ -55,6 +55,13 @@ public class ProductController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable(name = "productId") long productId) {
+        String productName = this.productService.deleteProduct(productId);
+
+        return new ResponseEntity<>(String.format(Global.Product_Deleted_Message, productName), HttpStatus.OK);
+    }
+
     //**********Exception Handlers*************//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
