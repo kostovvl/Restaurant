@@ -8,6 +8,10 @@ import restaurant.core.product.domain.category.ProductCategoryDto;
 import restaurant.core.product.repository.ProductCategoryRepository;
 
 import javax.persistence.EntityExistsException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductCategoryService {
@@ -30,6 +34,13 @@ public class ProductCategoryService {
         ProductCategory forSeed = this.mapper.map(newCategory, ProductCategory.class);
 
         return this.mapper.map(this.productCategoryRepository.saveAndFlush(forSeed), ProductCategoryDto.class);
+    }
+
+    public List<ProductCategoryDto> getAll() {
+
+        return this.productCategoryRepository.getAllCategories()
+                .stream().map(c -> this.mapper.map(c, ProductCategoryDto.class))
+                .collect(Collectors.toList());
     }
 
     public ProductCategoryDto findByName(String name) {
