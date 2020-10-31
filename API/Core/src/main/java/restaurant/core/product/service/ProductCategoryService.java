@@ -38,10 +38,14 @@ public class ProductCategoryService {
 
     public List<ProductCategoryDto> getAll() {
 
+        //**Ordered alphabetically by name**//
+
         return this.productCategoryRepository.getAllCategories()
                 .stream().map(c -> this.mapper.map(c, ProductCategoryDto.class))
                 .collect(Collectors.toList());
     }
+
+
 
     public ProductCategoryDto findByName(String name) {
         return this.productCategoryRepository.findByName(name)

@@ -42,8 +42,26 @@ public class ProductService {
     }
 
 
+
     public List<ProductDto> getAll() {
-        return this.productRepository.findAllOrOrderAlphabetically()
+
+        //**Ordered alphabetically by name**//
+        return this.productRepository.findAllProducts()
+                .stream()
+                .map(p -> {
+                    ProductDto productDto = this.mapper.map(p, ProductDto.class);
+                    productDto.setCategoryId(p.getCategory().getId());
+                    productDto.setCategoryName(p.getCategory().getName());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+
+    }
+
+    public List<ProductDto> getAllByCategory(long categoryId) {
+
+        //**Ordered alphabetically by name**//
+        return this.productRepository.findAllProductsByCategory(categoryId)
                 .stream()
                 .map(p -> {
                     ProductDto productDto = this.mapper.map(p, ProductDto.class);

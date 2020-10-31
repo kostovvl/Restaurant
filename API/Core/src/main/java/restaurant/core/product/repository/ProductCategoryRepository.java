@@ -13,7 +13,7 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
 
     Optional<ProductCategory> findByName(String name);
 
-    @Query("select c from ProductCategory as c order by c.id")
+    @Query("select c from ProductCategory as c order by c.name")
     List<ProductCategory> getAllCategories();
 
 }

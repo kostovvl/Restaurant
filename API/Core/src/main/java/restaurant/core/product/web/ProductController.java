@@ -34,6 +34,12 @@ public class ProductController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/by_category/{categoryId}")
+    public ResponseEntity<List<ProductDto>> getAllProductsByCategory(@PathVariable(name = "categoryId") long categoryId) {
+        List<ProductDto> result = this.productService.getAllByCategory(categoryId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     //**********Exception Handlers*************//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
