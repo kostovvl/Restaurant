@@ -55,6 +55,7 @@ public class ProductController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    //todo preauthorize for admin
     @DeleteMapping("/delete/{productId}")
     public ResponseEntity<String> deleteProduct(@PathVariable(name = "productId") long productId) {
         String productName = this.productService.deleteProduct(productId);

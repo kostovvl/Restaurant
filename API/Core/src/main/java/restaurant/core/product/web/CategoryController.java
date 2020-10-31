@@ -34,6 +34,14 @@ public class CategoryController {
     public ResponseEntity<List<ProductCategoryDto>> getAllCategories() {
         return new ResponseEntity<>(this.productCategoryService.getAll(), HttpStatus.OK);
     }
+    //todo preauthorize for admin
+    @PutMapping("/update/{categoryId}")
+    public ResponseEntity<ProductCategoryDto> updateCategory(@PathVariable(name = "categoryId") long categoryId,
+                                                             @RequestBody ProductCategoryDto updatedCategory) {
+        ProductCategoryDto result = this.productCategoryService.updateCategory(categoryId, updatedCategory);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
     public ResponseEntity<String> handleDbExceptions(EntityExistsException e) {

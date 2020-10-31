@@ -53,7 +53,22 @@ public class ProductCategoryService {
                 .orElse(null);
     }
 
+    public ProductCategoryDto updateCategory(long categoryId, ProductCategoryDto updatedCategory) {
+
+        ProductCategory existing = this.productCategoryRepository.getOne(categoryId);
+
+        existing.setName(updatedCategory.getName());
+
+        return this.mapper.map(
+                this.productCategoryRepository.saveAndFlush(existing), ProductCategoryDto.class);
+
+    }
+
+    //********** Private methods **********//
+
     private boolean categoryExists(String name) {
         return this.productCategoryRepository.findByName(name).orElse(null) != null;
     }
+
+
 }
