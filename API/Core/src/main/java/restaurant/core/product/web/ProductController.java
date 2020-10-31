@@ -23,7 +23,8 @@ public class ProductController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addNewProduct(@RequestBody()ProductDto productDto) {
-        return new ResponseEntity<>(this.productService.addNew(productDto), HttpStatus.OK);
+        ProductDto result = this.productService.addNew(productDto);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
