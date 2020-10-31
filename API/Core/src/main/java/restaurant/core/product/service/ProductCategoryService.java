@@ -1,6 +1,5 @@
 package restaurant.core.product.service;
 
-import jdk.jfr.Category;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import restaurant.core.product.domain.category.ProductCategory;
@@ -8,8 +7,6 @@ import restaurant.core.product.domain.category.ProductCategoryDto;
 import restaurant.core.product.repository.ProductCategoryRepository;
 
 import javax.persistence.EntityExistsException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +14,13 @@ import java.util.stream.Collectors;
 public class ProductCategoryService {
 
     private final ProductCategoryRepository productCategoryRepository;
+    private final ProductService productService;
     private final ModelMapper mapper;
 
-    public ProductCategoryService(ProductCategoryRepository productCategoryRepository, ModelMapper mapper) {
+    public ProductCategoryService(ProductCategoryRepository productCategoryRepository,
+                                  ProductService productService, ModelMapper mapper) {
         this.productCategoryRepository = productCategoryRepository;
+        this.productService = productService;
         this.mapper = mapper;
     }
 
@@ -62,6 +62,21 @@ public class ProductCategoryService {
         return this.mapper.map(
                 this.productCategoryRepository.saveAndFlush(existing), ProductCategoryDto.class);
 
+    }
+
+
+    public String deleteCategory(long categoryId) {
+
+        String result = this.productCategoryRepository.findById(categoryId).orElse(null).getName();
+        List<Long> productsFromTheCategoryIds = this.productService.findAllProductIdsByCategoryId(categoryId);
+
+        for (Long productId : productsFromTheCategoryIds) {
+            this.productService.deleteProduct(productId);
+        }
+
+        this.productCategoryRepository.deleteById(categoryId);
+
+        return result;
     }
 
     //********** Private methods **********//

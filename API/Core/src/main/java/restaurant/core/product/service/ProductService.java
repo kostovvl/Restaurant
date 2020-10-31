@@ -2,6 +2,7 @@ package restaurant.core.product.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import restaurant.core.configuration.BaseEntity;
 import restaurant.core.product.domain.category.ProductCategory;
 import restaurant.core.product.domain.product.Product;
 import restaurant.core.product.domain.product.ProductDto;
@@ -104,7 +105,13 @@ public class ProductService {
         this.productRepository.deleteById(productId);
 
         return productName;
+    }
 
+    public List<Long> findAllProductIdsByCategoryId(long categoryId) {
+        return this.productRepository.findAllProductsByCategory(categoryId)
+                .stream()
+                .map(BaseEntity::getId)
+                .collect(Collectors.toList());
     }
 
 

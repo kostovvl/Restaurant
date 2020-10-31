@@ -43,6 +43,13 @@ public class CategoryController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{categoryId}")
+    public ResponseEntity<String> deleteCategory(@PathVariable(name = "categoryId") long categoryId) {
+        String categoryName = this.productCategoryService.deleteCategory(categoryId);
+
+        return new ResponseEntity<>(String.format(Global.Category_Deleted_Message, categoryName), HttpStatus.OK);
+    }
+
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
     public ResponseEntity<String> handleDbExceptions(EntityExistsException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
