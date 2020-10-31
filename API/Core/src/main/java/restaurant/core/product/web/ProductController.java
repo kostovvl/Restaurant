@@ -40,6 +40,13 @@ public class ProductController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/details/{productId}")
+    public ResponseEntity<ProductDto> productDetails(@PathVariable(name = "productId") long productId) {
+        ProductDto result = this.productService.getDetails(productId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+ 
     //**********Exception Handlers*************//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})

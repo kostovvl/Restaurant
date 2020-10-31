@@ -74,6 +74,19 @@ public class ProductService {
     }
 
 
+    public ProductDto getDetails(long productId) {
+
+       return this.productRepository.findById(productId)
+               .map(p -> {
+                   ProductDto result = this.mapper.map(p, ProductDto.class);
+                   result.setCategoryId(p.getCategory().getId());
+                   result.setCategoryName(p.getCategory().getName());
+                   return result;
+               }).orElse(null);
+
+    }
+
+
 
 
     //**********Private Methods**********//
