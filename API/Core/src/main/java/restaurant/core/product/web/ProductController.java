@@ -10,6 +10,7 @@ import restaurant.core.product.service.ProductService;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -26,6 +27,14 @@ public class ProductController {
         ProductDto result = this.productService.addNew(productDto);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        List<ProductDto> result = this.productService.getAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    //**********Exception Handlers*************//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
     public ResponseEntity<String> handleDbExceptions(EntityExistsException e) {

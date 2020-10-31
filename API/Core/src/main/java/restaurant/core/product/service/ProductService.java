@@ -9,6 +9,8 @@ import restaurant.core.product.repository.ProductCategoryRepository;
 import restaurant.core.product.repository.ProductRepository;
 
 import javax.persistence.EntityExistsException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -39,8 +41,28 @@ public class ProductService {
         return newProduct;
     }
 
+
+    public List<ProductDto> getAll() {
+        return this.productRepository.findAllOrOrderAlphabetically()
+                .stream()
+                .map(p -> {
+                    ProductDto productDto = this.mapper.map(p, ProductDto.class);
+                    productDto.setCategoryId(p.getCategory().getId());
+                    productDto.setCategoryName(p.getCategory().getName());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+
+    }
+
+
+
+
+    //**********Private Methods**********//
+
     private boolean productExists(String name) {
         return this.productRepository.findByName(name).orElse(null) != null;
     }
+
 
 }
