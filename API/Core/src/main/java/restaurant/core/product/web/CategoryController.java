@@ -42,7 +42,7 @@ public class CategoryController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleAllExceptions(Exception e) {
-        return new ResponseEntity<>(Global.Try_Again_Message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 

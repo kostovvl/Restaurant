@@ -46,7 +46,15 @@ public class ProductController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
- 
+   //todo preauthorize only for admin
+    @PutMapping("/update/{productId}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable(name = "productId") long productId,
+                                                    @RequestBody() ProductDto updatedProduct) {
+        ProductDto result = this.productService.updateProduct(productId, updatedProduct);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     //**********Exception Handlers*************//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
@@ -56,7 +64,7 @@ public class ProductController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleAllExceptions(Exception e) {
-        return new ResponseEntity<>(Global.Try_Again_Message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }

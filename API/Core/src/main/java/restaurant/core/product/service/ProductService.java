@@ -86,6 +86,17 @@ public class ProductService {
 
     }
 
+    public ProductDto updateProduct(long productId, ProductDto updatedProduct) {
+        Product existing = this.productRepository.getOne(productId);
+        existing.setName(updatedProduct.getName());
+        existing.setPrice(updatedProduct.getPrice());
+        existing.setCategory(this.productCategoryRepository.getOne(updatedProduct.getCategoryId()));
+
+        return this.mapper.map(
+                this.productRepository.saveAndFlush(existing), ProductDto.class
+        );
+    }
+
 
 
 
@@ -94,6 +105,7 @@ public class ProductService {
     private boolean productExists(String name) {
         return this.productRepository.findByName(name).orElse(null) != null;
     }
+
 
 
 }
