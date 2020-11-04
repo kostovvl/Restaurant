@@ -1,7 +1,7 @@
 package restaurant.core.table.domain;
 
 import restaurant.core.configuration.BaseEntity;
-import restaurant.core.user.domain.UserEntity;
+import restaurant.core.user.domain.userEntity.UserEntity;
 
 import javax.persistence.*;
 

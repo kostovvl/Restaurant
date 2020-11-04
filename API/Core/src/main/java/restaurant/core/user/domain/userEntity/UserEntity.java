@@ -1,6 +1,7 @@
-package restaurant.core.user.domain;
+package restaurant.core.user.domain.userEntity;
 
 import restaurant.core.configuration.BaseEntity;
+import restaurant.core.user.domain.userEntiryRole.UserEntityRole;
 
 import javax.persistence.*;
 import java.util.Set;

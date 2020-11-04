@@ -1,6 +1,7 @@
-package restaurant.core.user.domain;
+package restaurant.core.user.domain.userEntiryRole;
 
 import restaurant.core.configuration.BaseEntity;
+import restaurant.core.user.domain.userEntity.UserEntity;
 
 import javax.persistence.*;
 
@@ -12,6 +13,10 @@ public class UserEntityRole extends BaseEntity {
     private UserEntity user;
 
     public UserEntityRole() {
+    }
+
+    public UserEntityRole(String role) {
+        this.role = role;
     }
 
     @Column(name = "role")
