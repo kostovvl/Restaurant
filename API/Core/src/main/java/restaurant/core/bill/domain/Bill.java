@@ -1,12 +1,9 @@
 package restaurant.core.bill.domain;
-
 import restaurant.core.configuration.BaseEntity;
-import restaurant.core.product.domain.product.Product;
 import restaurant.core.table.domain.TableEntity;
 import restaurant.core.user.domain.UserEntity;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.Map;
 
 @Entity

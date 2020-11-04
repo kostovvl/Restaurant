@@ -7,4 +7,6 @@ public class Global {
     public static final String Category_Deleted_Message = "Category \"%s\" and all containing " +
             "products have been successfully deleted!";
 
+    public static final String Table_Created_Message = "Table number: \"%s\" Created!";
+
 }

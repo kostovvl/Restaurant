@@ -15,6 +15,10 @@ public class TableEntity extends BaseEntity {
     public TableEntity() {
     }
 
+    public TableEntity(int number) {
+        this.number = number;
+    }
+
     @Column(name = "number")
     public int getNumber() {
         return number;
