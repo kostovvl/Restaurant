@@ -59,8 +59,20 @@ public class UserEntityService {
         return waiter.getName();
     }
 
+
+
+    public String removeTableFromWaiter(long waiterId, long tableId) {
+        TableEntity tableEntity = this.tableRepository.getOne(tableId);
+        UserEntity waiter = this.userEntityRepository.getOne(waiterId);
+
+        tableEntity.setWaiter(null);
+
+        this.tableRepository.saveAndFlush(tableEntity);
+
+        return waiter.getName();
+    }
+
     private boolean userExists(String name) {
         return this.userEntityRepository.findByName(name).orElse(null) != null;
     }
-
 }

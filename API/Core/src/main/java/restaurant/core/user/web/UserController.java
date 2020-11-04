@@ -37,6 +37,16 @@ public class UserController {
                 HttpStatus.OK);
     }
 
+    @PutMapping("/remove_table/{waiterId}/{tableId}")
+    public ResponseEntity<String> removeTableFromWaiter(@PathVariable(name = "waiterId") long waiterId,
+                                                   @PathVariable(name = "tableId") long tableId) {
+
+        String waiterName = this.userEntityService.removeTableFromWaiter(waiterId, tableId);
+
+        return new ResponseEntity<>(String.format(Global.Table_Removed_To_Waiter_Message, tableId, waiterName),
+                HttpStatus.OK);
+    }
+
     //********** Error Handlers **********//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
