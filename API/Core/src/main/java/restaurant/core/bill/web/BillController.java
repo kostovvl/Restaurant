@@ -4,11 +4,11 @@ import org.hibernate.TransactionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import restaurant.core.bill.domain.BillDto;
 import restaurant.core.bill.service.BillService;
-import restaurant.core.configuration.Global;
-
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bills")
@@ -21,10 +21,22 @@ public class BillController {
     }
 
     @PostMapping("/create/{waiterId}/{tableId}")
-    public ResponseEntity<String> createNewBill(@PathVariable(name = "waiterId") long waiterId,
+    public ResponseEntity<?> createNewBill(@PathVariable(name = "waiterId") long waiterId,
                                         @PathVariable(name = "tableId") long tableId) {
-        long billId = this.billService.createNewBill(waiterId, tableId);
-        return new ResponseEntity<>(String.format(Global.Bill_Created_Message, billId), HttpStatus.OK);
+        BillDto result = this.billService.createNewBill(waiterId, tableId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    //*** Get Bill Methods ***//
+
+    @GetMapping("/get/all")
+    public ResponseEntity<List<BillDto>> getAllBills() {
+        return new ResponseEntity<>(this.billService.getAllBills(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/by_waiter/{waiterId}")
+    public ResponseEntity<List<BillDto>> getBillsByWaiter(@PathVariable(name = "waiterId") long waiterId) {
+        return new ResponseEntity<>(this.billService.getBillsByWaiter(waiterId), HttpStatus.OK);
     }
 
     //********** Error Handlers **********//
