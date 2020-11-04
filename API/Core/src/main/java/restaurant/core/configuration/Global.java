@@ -10,5 +10,6 @@ public class Global {
     public static final String Table_Created_Message = "Table with number: \"%s\" Created!";
     public static final String Table_Added_To_Waiter_Message = "Table with number: \"%s\" added to waiter %s!";
     public static final String Table_Removed_To_Waiter_Message = "Table with number: \"%s\" removed from waiter %s!";
+    public static final String Bill_Created_Message = "Bill number: \"%s\" created!";
 
 }
