@@ -4,6 +4,7 @@ import org.hibernate.TransactionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import restaurant.core.configuration.Global;
 import restaurant.core.user.domain.userEntity.UserEntityDto;
 import restaurant.core.user.service.UserEntityService;
 
@@ -24,6 +25,16 @@ public class UserController {
     public ResponseEntity<?> createNewUser(@RequestBody UserEntityDto newUser) {
         UserEntityDto result = this.userEntityService.createNewUser(newUser);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping("/add_table/{waiterId}/{tableId}")
+    public ResponseEntity<String> addTableToWaiter(@PathVariable(name = "waiterId") long waiterId,
+                                                   @PathVariable(name = "tableId") long tableId) {
+
+        String waiterName = this.userEntityService.addTableToWaiter(waiterId, tableId);
+
+        return new ResponseEntity<>(String.format(Global.Table_Added_To_Waiter_Message, tableId, waiterName),
+                HttpStatus.OK);
     }
 
     //********** Error Handlers **********//

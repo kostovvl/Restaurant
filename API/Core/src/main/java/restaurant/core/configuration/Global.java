@@ -7,6 +7,7 @@ public class Global {
     public static final String Category_Deleted_Message = "Category \"%s\" and all containing " +
             "products have been successfully deleted!";
 
-    public static final String Table_Created_Message = "Table number: \"%s\" Created!";
+    public static final String Table_Created_Message = "Table with number: \"%s\" Created!";
+    public static final String Table_Added_To_Waiter_Message = "Table with number: \"%s\" added to waiter %s!";
 
 }

@@ -2,6 +2,8 @@ package restaurant.core.user.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import restaurant.core.table.domain.TableEntity;
+import restaurant.core.table.repository.TableRepository;
 import restaurant.core.user.domain.userEntiryRole.UserEntityRole;
 import restaurant.core.user.domain.userEntity.UserEntity;
 import restaurant.core.user.domain.userEntity.UserEntityDto;
@@ -16,12 +18,15 @@ public class UserEntityService {
 
     private final UserEntityRepository userEntityRepository;
     private final UserEntityRoleRepository userEntityRoleRepository;
+    private final TableRepository tableRepository;
     private final ModelMapper mapper;
 
     public UserEntityService(UserEntityRepository userEntityRepository,
-                             UserEntityRoleRepository userEntityRoleRepository, ModelMapper mapper) {
+                             UserEntityRoleRepository userEntityRoleRepository,
+                             TableRepository tableRepository, ModelMapper mapper) {
         this.userEntityRepository = userEntityRepository;
         this.userEntityRoleRepository = userEntityRoleRepository;
+        this.tableRepository = tableRepository;
         this.mapper = mapper;
     }
 
@@ -41,6 +46,17 @@ public class UserEntityService {
         return this.mapper.map(
                 this.userEntityRepository.saveAndFlush(userEntity), UserEntityDto.class
         );
+    }
+
+    public String addTableToWaiter(long waiterId, long tableId) {
+        TableEntity tableEntity = this.tableRepository.getOne(tableId);
+        UserEntity waiter = this.userEntityRepository.getOne(waiterId);
+
+        tableEntity.setWaiter(waiter);
+
+        this.tableRepository.saveAndFlush(tableEntity);
+
+        return waiter.getName();
     }
 
     private boolean userExists(String name) {
