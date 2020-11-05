@@ -46,4 +46,13 @@ public class Bill extends BaseEntity {
     public void setProducts(Map<Long, Integer> products) {
         this.products = products;
     }
+
+    public void addProducts(Map<Long, Integer> products) {
+        for (Map.Entry<Long, Integer> product : products.entrySet()) {
+            this.products.putIfAbsent(product.getKey(), 0);
+            int currentQuantity = this.products.get(product.getKey());
+            this.products.put(product.getKey(), currentQuantity + product.getValue());
+        }
+
+    }
 }

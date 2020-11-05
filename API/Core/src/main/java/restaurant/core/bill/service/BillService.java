@@ -11,6 +11,7 @@ import restaurant.core.user.domain.userEntity.UserEntity;
 import restaurant.core.user.repository.UserEntityRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,6 +95,14 @@ public class BillService {
     }
 
     //**** Finish of Get Bill Methods ****//
+
+    public BillDto addProduct(long billId, Map<Long, Integer> products) {
+        Bill bill = this.billRepository.getOne(billId);
+        bill.addProducts(products);
+
+        return this.mapper.map(
+                this.billRepository.saveAndFlush(bill), BillDto.class);
+    }
 
     //********** Private Methods **********//
 

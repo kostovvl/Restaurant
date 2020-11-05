@@ -9,6 +9,7 @@ import restaurant.core.bill.service.BillService;
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/bills")
@@ -48,6 +49,17 @@ public class BillController {
     public ResponseEntity<List<BillDto>> getBillsByTableAndWaiter(@PathVariable(name = "tableId") long tableId,
                                                                   @PathVariable(name = "waiterId") long waiterId){
         return new ResponseEntity<>(this.billService.getBillsByTableAndWaiter(tableId, waiterId), HttpStatus.OK);
+    }
+
+    //*** End of Get Bill Methods ***//
+
+    @PutMapping("/add/product/{billId}")
+    public ResponseEntity<?> addProduct(@PathVariable(name = "billId") long billId,
+                                        @RequestBody Map<Long, Integer> products) {
+
+        BillDto result = this.billService.addProduct(billId, products);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     //********** Error Handlers **********//
