@@ -62,12 +62,44 @@ public class BillService {
                 .collect(Collectors.toList());
     }
 
+    public List<BillDto> getBillsByTable(long tableId) {
+
+        if (tableId == 0) {
+           return  this.billRepository.findByForTakeAway()
+                    .stream()
+                    .map(this::mapBill)
+                    .collect(Collectors.toList());
+        } else {
+
+        return  this.billRepository.findByTableId(tableId)
+                .stream()
+                .map(this::mapBill)
+                .collect(Collectors.toList());
+        }
+    }
+
+    public List<BillDto> getBillsByTableAndWaiter(long tableId, long waiterId) {
+
+        if (tableId == 0) {
+            return  this.billRepository.findByForTakeAwayAndWaiterId(waiterId)
+                    .stream()
+                    .map(this::mapBill)
+                    .collect(Collectors.toList());
+        } else {
+        return  this.billRepository.findByTableAndWaiterId(tableId, waiterId)
+                .stream()
+                .map(this::mapBill)
+                .collect(Collectors.toList());
+        }
+    }
+
     //**** Finish of Get Bill Methods ****//
 
     //********** Private Methods **********//
 
     private BillDto mapBill(Bill bill) {
         BillDto result = new BillDto();
+        result.setId(bill.getId());
         result.setWaiterId(bill.getWaiter().getId());
         if (bill.getTable() == null) {
             result.setTableId(0);

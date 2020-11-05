@@ -39,6 +39,17 @@ public class BillController {
         return new ResponseEntity<>(this.billService.getBillsByWaiter(waiterId), HttpStatus.OK);
     }
 
+    @GetMapping("/get/by_table/{tableId}")
+    public ResponseEntity<List<BillDto>> getBillsByTable(@PathVariable(name = "tableId") long tableId) {
+        return new ResponseEntity<>(this.billService.getBillsByTable(tableId), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/by_table_and_waiter/{tableId}/{waiterId}")
+    public ResponseEntity<List<BillDto>> getBillsByTableAndWaiter(@PathVariable(name = "tableId") long tableId,
+                                                                  @PathVariable(name = "waiterId") long waiterId){
+        return new ResponseEntity<>(this.billService.getBillsByTableAndWaiter(tableId, waiterId), HttpStatus.OK);
+    }
+
     //********** Error Handlers **********//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
