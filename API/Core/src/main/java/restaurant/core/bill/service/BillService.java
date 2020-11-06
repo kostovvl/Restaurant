@@ -128,24 +128,11 @@ public class BillService {
         } else {
         result.setTableId(bill.getTable().getId());
         }
-
-        Map<ProductDto, Integer> products = mapProducts(bill.getProducts());
-        result.setProducts(products);
+        result.setProducts(bill.getProducts());
         return result;
     }
 
-    private Map<ProductDto, Integer> mapProducts(Map<Long, Integer> products) {
-        Map<ProductDto, Integer> result = new HashMap<>();
 
-        for (Map.Entry<Long, Integer> product : products.entrySet()) {
-            Product product1 = this.productRepository.findById(product.getKey()).orElse(null);
-            ProductDto productDto = this.mapper.map(
-                    product1, ProductDto.class
-            );
-            result.put(productDto, product.getValue());
-        }
-        return result;
-    }
 
 
 
