@@ -57,9 +57,18 @@ public class BillController {
     public ResponseEntity<?> addProduct(@PathVariable(name = "billId") long billId,
                                         @RequestBody Map<Long, Integer> products) {
 
-        BillDto result = this.billService.addProduct(billId, products);
+        this.billService.addProduct(billId, products);
 
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/product/{billId}/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable(name = "billId") long billId,
+                                        @PathVariable(name = "productId") long productId) {
+
+        this.billService.deleteProduct(billId, productId);
+
+        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
     //********** Error Handlers **********//

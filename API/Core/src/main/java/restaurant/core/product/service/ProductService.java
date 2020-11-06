@@ -38,7 +38,7 @@ public class ProductService {
 
         this.productRepository.saveAndFlush(product);
         newProduct.setId(product.getId());
-
+        newProduct.setCategoryName(category.getName());
         return newProduct;
     }
 

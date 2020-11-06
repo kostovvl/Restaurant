@@ -5,11 +5,15 @@ import org.springframework.stereotype.Service;
 import restaurant.core.bill.domain.Bill;
 import restaurant.core.bill.domain.BillDto;
 import restaurant.core.bill.repository.BillRepository;
+import restaurant.core.product.domain.product.Product;
+import restaurant.core.product.domain.product.ProductDto;
+import restaurant.core.product.repository.ProductRepository;
 import restaurant.core.table.domain.TableEntity;
 import restaurant.core.table.repository.TableRepository;
 import restaurant.core.user.domain.userEntity.UserEntity;
 import restaurant.core.user.repository.UserEntityRepository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,13 +24,15 @@ public class BillService {
     private final BillRepository billRepository;
     private final UserEntityRepository userEntityRepository;
     private final TableRepository tableRepository;
+    private final ProductRepository productRepository;
     private final ModelMapper mapper;
 
     public BillService(BillRepository billRepository, UserEntityRepository userEntityRepository,
-                       TableRepository tableRepository, ModelMapper mapper) {
+                       TableRepository tableRepository, ProductRepository productRepository, ModelMapper mapper) {
         this.billRepository = billRepository;
         this.userEntityRepository = userEntityRepository;
         this.tableRepository = tableRepository;
+        this.productRepository = productRepository;
         this.mapper = mapper;
     }
 
@@ -96,12 +102,19 @@ public class BillService {
 
     //**** Finish of Get Bill Methods ****//
 
-    public BillDto addProduct(long billId, Map<Long, Integer> products) {
+    public void addProduct(long billId, Map<Long, Integer> products) {
         Bill bill = this.billRepository.getOne(billId);
         bill.addProducts(products);
 
-        return this.mapper.map(
-                this.billRepository.saveAndFlush(bill), BillDto.class);
+        this.billRepository.saveAndFlush(bill);
+
+    }
+
+    public void deleteProduct(long billId, long productId) {
+        Bill bill = this.billRepository.getOne(billId);
+        bill.deleteProduct(productId);
+
+        this.billRepository.saveAndFlush(bill);
     }
 
     //********** Private Methods **********//
@@ -115,9 +128,25 @@ public class BillService {
         } else {
         result.setTableId(bill.getTable().getId());
         }
-        result.setProducts(bill.getProducts());
+
+        Map<ProductDto, Integer> products = mapProducts(bill.getProducts());
+        result.setProducts(products);
         return result;
     }
+
+    private Map<ProductDto, Integer> mapProducts(Map<Long, Integer> products) {
+        Map<ProductDto, Integer> result = new HashMap<>();
+
+        for (Map.Entry<Long, Integer> product : products.entrySet()) {
+            Product product1 = this.productRepository.findById(product.getKey()).orElse(null);
+            ProductDto productDto = this.mapper.map(
+                    product1, ProductDto.class
+            );
+            result.put(productDto, product.getValue());
+        }
+        return result;
+    }
+
 
 
 }
