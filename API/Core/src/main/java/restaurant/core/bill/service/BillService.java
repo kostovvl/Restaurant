@@ -142,6 +142,7 @@ public class BillService {
         }
         result.setProducts(bill.getProducts());
         result.setProductPrices(calculatePrices(bill.getProducts()));
+        result.setTotalPrice(bill.getTotalPrice());
         return result;
     }
 

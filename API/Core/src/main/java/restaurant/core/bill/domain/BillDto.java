@@ -10,6 +10,7 @@ public class BillDto extends BaseDto {
     private long tableId;
     private Map<Long, Integer> products;
     private Map<Long, Double> productPrices;
+    private double totalPrice;
 
     public BillDto() {
     }
@@ -44,5 +45,13 @@ public class BillDto extends BaseDto {
 
     public void setProductPrices(Map<Long, Double> productPrices) {
         this.productPrices = productPrices;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

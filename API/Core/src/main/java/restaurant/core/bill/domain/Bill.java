@@ -58,6 +58,7 @@ public class Bill extends BaseEntity {
     }
 
     public void addProduct(long productId, int quantity) {
+        this.products.putIfAbsent(productId, 0);
             int currentQuantity = this.products.get(productId);
             this.products.put(productId, currentQuantity + quantity);
 
