@@ -6,26 +6,27 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "reports")
 public class DailyReport extends BaseEntity {
 
-    private String day;
+    private LocalDateTime date;
     private List<Long> bills;
     private double total;
 
     public DailyReport() {
     }
 
-    @Column(name = "day_of_week")
-    public String getDay() {
-        return day;
+    @Column(name = "date")
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     @ElementCollection()
