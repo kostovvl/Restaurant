@@ -104,7 +104,16 @@ public class BillService {
 
     public void addProduct(long billId, Map<Long, Integer> products) {
         Bill bill = this.billRepository.getOne(billId);
-        bill.addProducts(products);
+        for (Map.Entry<Long, Integer> product : products.entrySet()) {
+            long id = product.getKey();
+            int quantity = product.getValue();
+
+            double price = this.productRepository.findById(id).orElse(null).getPrice() * quantity;
+
+            bill.addProduct(id, quantity);
+            bill.addToTotalPrice(price);
+
+        }
 
         this.billRepository.saveAndFlush(bill);
 
@@ -112,7 +121,10 @@ public class BillService {
 
     public void deleteProduct(long billId, long productId) {
         Bill bill = this.billRepository.getOne(billId);
-        bill.deleteProduct(productId);
+
+        double price = this.productRepository.findById(productId).orElse(null).getPrice();
+
+        bill.deleteProduct(productId, price);
 
         this.billRepository.saveAndFlush(bill);
     }
@@ -129,11 +141,20 @@ public class BillService {
         result.setTableId(bill.getTable().getId());
         }
         result.setProducts(bill.getProducts());
+        result.setProductPrices(calculatePrices(bill.getProducts()));
         return result;
     }
 
+    private Map<Long, Double> calculatePrices(Map<Long, Integer> products) {
+        Map<Long, Double> result = new HashMap<>();
 
-
+        for (Map.Entry<Long, Integer> product : products.entrySet()) {
+            Long id = product.getKey();
+            double price = this.productRepository.findById(id).orElse(null).getPrice() * product.getValue();
+            result.put(id, price);
+        }
+        return result;
+    }
 
 
 }

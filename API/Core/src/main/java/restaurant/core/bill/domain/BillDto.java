@@ -8,7 +8,8 @@ public class BillDto extends BaseDto {
 
     private long waiterId;
     private long tableId;
-    private Map<Long, Integer> products; // todo make so the dto brings out the products not only the Ids
+    private Map<Long, Integer> products;
+    private Map<Long, Double> productPrices;
 
     public BillDto() {
     }
@@ -35,5 +36,13 @@ public class BillDto extends BaseDto {
 
     public void setProducts(Map<Long, Integer> products) {
         this.products = products;
+    }
+
+    public Map<Long, Double> getProductPrices() {
+        return productPrices;
+    }
+
+    public void setProductPrices(Map<Long, Double> productPrices) {
+        this.productPrices = productPrices;
     }
 }

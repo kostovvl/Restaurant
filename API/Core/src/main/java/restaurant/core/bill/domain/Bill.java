@@ -13,6 +13,7 @@ public class Bill extends BaseEntity {
     private UserEntity waiter;
     private TableEntity table;
     private Map<Long, Integer> products;
+    private double totalPrice;
 
     public Bill() {
     }
@@ -47,17 +48,34 @@ public class Bill extends BaseEntity {
         this.products = products;
     }
 
-    public void addProducts(Map<Long, Integer> products) {
-        for (Map.Entry<Long, Integer> product : products.entrySet()) {
-            long id = product.getKey();
-            int quantity = product.getValue();
-            this.products.putIfAbsent(id, 0);
-            int currentQuantity = this.products.get(id);
-            this.products.put(id, currentQuantity + quantity);
-        }
+    @Column(name = "total_price")
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void deleteProduct(long productId) {
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void addProduct(long productId, int quantity) {
+            int currentQuantity = this.products.get(productId);
+            this.products.put(productId, currentQuantity + quantity);
+
+    }
+
+    public void deleteProduct(long productId, double price) {
+
+        double priceToSubtract = this.products.get(productId) * price;
+
         this.products.remove(productId);
+        this.removeFromToTotalPrice(priceToSubtract);
+    }
+
+    public void addToTotalPrice(double price) {
+        this.totalPrice += price;
+    }
+
+    public void removeFromToTotalPrice(double price) {
+        this.totalPrice -= price;
     }
 }
