@@ -10,6 +10,7 @@ import java.util.Map;
 @Table(name = "bills")
 public class Bill extends BaseEntity {
 
+    private boolean isActive;
     private UserEntity waiter;
     private TableEntity table;
     private Map<Long, Integer> products;
@@ -78,5 +79,13 @@ public class Bill extends BaseEntity {
 
     public void removeFromToTotalPrice(double price) {
         this.totalPrice -= price;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

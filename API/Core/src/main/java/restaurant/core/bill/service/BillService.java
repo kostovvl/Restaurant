@@ -45,6 +45,7 @@ public class BillService {
             table = this.tableRepository.getOne(tableId);
         }
 
+        bill.setActive(true);
         bill.setWaiter(waiter);
         bill.setTable(table);
 
@@ -128,6 +129,15 @@ public class BillService {
 
         this.billRepository.saveAndFlush(bill);
     }
+
+
+    public void closeBill(long billId) {
+        Bill bill = this.billRepository.getOne(billId);
+        bill.setActive(false);
+
+        this.billRepository.saveAndFlush(bill);
+    }
+
 
     //********** Private Methods **********//
 

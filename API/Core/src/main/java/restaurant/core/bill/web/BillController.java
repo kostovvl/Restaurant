@@ -71,6 +71,13 @@ public class BillController {
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    @PutMapping("/close/{billId}")
+    public ResponseEntity<?> closeBill(@PathVariable(name = "billId") long billId) {
+        this.billService.closeBill(billId);
+
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
     //********** Error Handlers **********//
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
