@@ -101,6 +101,12 @@ public class BillService {
         }
     }
 
+    public BillDto findById(long id) {
+        return this.billRepository.findById(id)
+                .map(this::mapBill)
+                .orElse(null);
+    }
+
     //**** Finish of Get Bill Methods ****//
 
     public void addProduct(long billId, Map<Long, Integer> products) {
