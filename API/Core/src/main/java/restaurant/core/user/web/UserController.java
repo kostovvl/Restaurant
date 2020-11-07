@@ -27,6 +27,15 @@ public class UserController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
+    //Mock login just for development purposes
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserEntityDto loginUser) {
+        UserEntityDto logged = this.userEntityService.login(loginUser);
+
+        return new ResponseEntity<>(logged, HttpStatus.OK);
+    }
+
     @PutMapping("/add_table/{waiterId}/{tableId}")
     public ResponseEntity<String> addTableToWaiter(@PathVariable(name = "waiterId") long waiterId,
                                                    @PathVariable(name = "tableId") long tableId) {

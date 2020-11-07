@@ -48,6 +48,13 @@ public class UserEntityService {
         );
     }
 
+    //Mock login just for development purposes
+    public UserEntityDto login(UserEntityDto loginUser) {
+        return this.userEntityRepository.findByName(loginUser.getName())
+                .map(u -> this.mapper.map(u, UserEntityDto.class))
+                .orElse(null);
+    }
+
     public String addTableToWaiter(long waiterId, long tableId) {
         TableEntity tableEntity = this.tableRepository.getOne(tableId);
         UserEntity waiter = this.userEntityRepository.getOne(waiterId);
@@ -75,4 +82,6 @@ public class UserEntityService {
     private boolean userExists(String name) {
         return this.userEntityRepository.findByName(name).orElse(null) != null;
     }
+
+
 }
