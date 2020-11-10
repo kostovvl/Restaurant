@@ -1,0 +1,17 @@
+<div *ngIf="!login && !register">
+<div class="form-group" (click) = selectRegister()>
+    <button type="submit" class="btn btn-primary btn-block"> Register </button>
+</div>
+
+  <div class="form-group" (click) = selectLogin() >
+    <button type="submit" class="btn btn-primary btn-block"> Login </button>
+  </div>
+
+</div>
+  <div *ngIf="login" >
+      <app-login></app-login>
+  </div>
+
+  <div *ngIf="register" >
+   <app-register></app-register>
+</div>
