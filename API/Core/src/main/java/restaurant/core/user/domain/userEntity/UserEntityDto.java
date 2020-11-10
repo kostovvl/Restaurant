@@ -9,7 +9,7 @@ public class UserEntityDto extends BaseDto {
 
     private String name;
     private String password;
-    private Set<UserEntityRoleDto>roles;
+    private Set<String>roles;
 
     public UserEntityDto() {
     }
@@ -30,11 +30,11 @@ public class UserEntityDto extends BaseDto {
         this.password = password;
     }
 
-    public Set<UserEntityRoleDto> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<UserEntityRoleDto> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 }

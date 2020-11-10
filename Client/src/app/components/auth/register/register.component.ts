@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.form.controls)
     this.authService.register(this.form.value)
     .subscribe( data => {
+  
       this.router.navigate(['/home'])
     })
   }

@@ -12,6 +12,7 @@ import restaurant.core.user.repository.UserEntityRoleRepository;
 
 import javax.persistence.EntityExistsException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserEntityService {
@@ -51,7 +52,12 @@ public class UserEntityService {
     //Mock login just for development purposes
     public UserEntityDto login(UserEntityDto loginUser) {
         return this.userEntityRepository.findByName(loginUser.getName())
-                .map(u -> this.mapper.map(u, UserEntityDto.class))
+                .map(u -> {
+                    UserEntityDto result = this.mapper.map(u, UserEntityDto.class);
+                    Set<String> dtoRoles = u.getRoles().stream().map(UserEntityRole::getRole).collect(Collectors.toSet());
+                    result.setRoles(dtoRoles);
+                    return result;
+                })
                 .orElse(null);
     }
 

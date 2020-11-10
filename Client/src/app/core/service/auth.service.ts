@@ -21,7 +21,21 @@ export class AuthService {
   }
 
   saveUserInfo(info: string[]) {
+    localStorage.setItem('id', info['id']);
+    localStorage.setItem('name', info['name']);
+    localStorage.setItem('roles', info['roles']);
+  }
 
+  getId() {
+    return localStorage.getItem('id');
+  }
+
+  getName() {
+    return localStorage.getItem('name');
+  }
+
+  getRoles() {
+    return localStorage.getItem('roles');
   }
 
 }
