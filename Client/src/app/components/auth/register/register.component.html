@@ -8,9 +8,9 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
             </div>
-            <input class="form-control" placeholder="Full Name" formControlName = "fullName">
+            <input class="form-control" placeholder="Name" formControlName = "name">
           </div>
-          <div class="alert alert-danger" *ngIf="f.fullName.errors?.required && f.fullName.touched" >
+          <div class="alert alert-danger" *ngIf="f.name.errors?.required && f.name.touched" >
               This field is required
           </div>
           <div class="form-group input-group">
