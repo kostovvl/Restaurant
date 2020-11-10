@@ -20,6 +20,7 @@ public class AppBeanConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/waiters/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/tables/**").allowedOrigins("http://localhost:4200");
             }
         };
     }

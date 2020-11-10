@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
    this.authService.login(this.form.value)
    .subscribe(data => {
      this.authService.saveUserInfo(data);
-     this.router.navigate(['/bills']);
+     this.router.navigate(['/welcome']);
    })
   }
 

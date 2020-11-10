@@ -24,7 +24,7 @@ public class TableController {
     @PostMapping("/create/{tableNumber}")
     public ResponseEntity<String> createNewTable(@PathVariable(name = "tableNumber") int tableNumber) {
         this.tableService.createTable(tableNumber);
-        return new ResponseEntity<>(String.format(Global.Table_Created_Message, tableNumber), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //********** Error Handlers **********//
