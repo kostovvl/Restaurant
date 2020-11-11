@@ -10,6 +10,7 @@ import restaurant.core.user.service.UserEntityService;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/waiters")
@@ -27,6 +28,12 @@ public class UserController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllWaiters() {
+        List<UserEntityDto> result = this.userEntityService.getAllWaiters();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
     //Mock login just for development purposes
     @PostMapping("/login")
@@ -36,14 +43,14 @@ public class UserController {
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/add_table/{waiterId}/{tableId}")
     public ResponseEntity<String> addTableToWaiter(@PathVariable(name = "waiterId") long waiterId,
                                                    @PathVariable(name = "tableId") long tableId) {
 
         String waiterName = this.userEntityService.addTableToWaiter(waiterId, tableId);
 
-        return new ResponseEntity<>(String.format(Global.Table_Added_To_Waiter_Message, tableId, waiterName),
-                HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/remove_table/{waiterId}/{tableId}")

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { TablesService } from 'src/app/core/service/tables.service';
+import Table from 'src/app/core/model/table.model';
 
 @Component({
   selector: 'app-create-table',
@@ -10,6 +12,7 @@ import { TablesService } from 'src/app/core/service/tables.service';
 export class CreateTableComponent implements OnInit {
 
   form;
+  tables$: Observable<Table[]>
 
   constructor(private tableService: TablesService,
     private fb: FormBuilder) { }
@@ -18,6 +21,8 @@ export class CreateTableComponent implements OnInit {
     this.form = this.fb.group({
       number: ['', Validators.required]
     })
+    this.tables$ = this.tableService.getAllTables();
+    this.tables$.subscribe(data => {console.log(data)})
   }
 
   get f() {

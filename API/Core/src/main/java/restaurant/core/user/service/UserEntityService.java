@@ -11,6 +11,7 @@ import restaurant.core.user.repository.UserEntityRepository;
 import restaurant.core.user.repository.UserEntityRoleRepository;
 
 import javax.persistence.EntityExistsException;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -85,9 +86,24 @@ public class UserEntityService {
         return waiter.getName();
     }
 
+    public List<UserEntityDto> getAllWaiters() {
+
+        return this.userEntityRepository.findAll()
+                .stream()
+                .filter(u -> u.getRoles().size() == 1)
+                .map(u -> {
+                    UserEntityDto result = this.mapper.map(u, UserEntityDto.class);
+                    Set<String> roles = u.getRoles().stream().map(UserEntityRole::getRole).collect(Collectors.toSet());
+                    result.setRoles(roles);
+                    return result;
+                }).collect(Collectors.toList());
+
+    }
+
     private boolean userExists(String name) {
         return this.userEntityRepository.findByName(name).orElse(null) != null;
     }
+
 
 
 }

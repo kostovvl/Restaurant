@@ -5,4 +5,11 @@
       </div>
  </form>
 
+ <div>
+     <p>Existing tables:</p>
+     <div *ngFor= "let table of tables$ | async">
+         <p>Table number: {{table.number}}</p>
+     </div>
+ </div>
+
  

@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurant.core.configuration.Global;
+import restaurant.core.table.domain.TableEntityDto;
 import restaurant.core.table.service.TableService;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/tables")
@@ -18,6 +20,20 @@ public class TableController {
 
     public TableController(TableService tableService) {
         this.tableService = tableService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllTables() {
+        List<TableEntityDto> result = this.tableService.getAllTables();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/free")
+    public ResponseEntity<?> getAllFreeTables() {
+        List<TableEntityDto> result = this.tableService.getAllFreeTables();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     //todo make the method reachable only for admin
