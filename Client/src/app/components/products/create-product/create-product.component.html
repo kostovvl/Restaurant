@@ -1,1 +1,31 @@
-<p>create-product works!</p>
+<form [formGroup] = "form" (submit) = create()> 
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <input class="form-control" placeholder="Product Namee" formControlName = "name">
+    </div>
+    <div class="alert alert-danger" *ngIf="f.name.errors?.required && f.name.touched" >
+        This field is required
+    </div>
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+      </div>
+      <input class="form-control" placeholder="price" type="number" formControlName = "price" >
+    </div>
+    <div class="alert alert-danger" *ngIf="f.price.errors?.required && f.price.touched" >
+      This field is required
+  </div>
+    <div class="form-group input-group">
+      <select class="form-control" formControlName = "categoryId" >
+        <option value="{{category.id}}" *ngFor="let category of categories$ | async" >{{category.name}}</option>
+      </select>
+    </div>
+    <div class="alert alert-danger" *ngIf="f.categoryId.errors?.required && f.categoryId.touched" >
+      This field is required
+  </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block"> Create Product </button>
+    </div>
+  </form>

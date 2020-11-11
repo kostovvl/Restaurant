@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Product from '../model/product.model';
+import Category from '../model/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,15 @@ export class ProductsService {
   }
 
   createProduct(form: Object) {
-    return this.http.post(this.create_category_url, form)
+    return this.http.post(this.create_product_url, form)
   }
 
   getAllProducts() {
     return this.http.get<Product[]>(this.get_all_products_url);
+  }
+
+  getAllCategories() {
+    return this.http.get<Category[]>(this.get_all_categories_url);
   }
 
 }
