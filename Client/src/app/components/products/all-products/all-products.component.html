@@ -1,3 +1,10 @@
+<div class="form-group" [routerLink]= "['/products/create/category']" >
+    <button type="submit" class="btn btn-primary btn-block"> Create category </button>
+  </div>
+
+  <div class="form-group" [routerLink]= "['/products/create/product']">
+    <button type="submit" class="btn btn-primary btn-block"> Create Product </button>
+  </div>
 <p>All Products</p>
 <div *ngFor= "let product of allProducts$ | async" >
     <p>{{product.name}} , price: {{product.price}}, category: {{product.categoryName}}</p>
