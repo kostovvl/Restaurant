@@ -5,6 +5,7 @@ import { AllBillsComponent } from 'src/app/components/bills/all-bills/all-bills.
 import { WelcomeComponent } from 'src/app/components/shared/welcome/welcome.component';
 import { CreateTableComponent } from 'src/app/components/tables/create-table/create-table.component';
 import { AddTableComponent } from 'src/app/components/tables/add-table/add-table.component';
+import { AllProductsComponent } from 'src/app/components/products/all-products/all-products.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'bills', component: AllBillsComponent },
   { path: 'tables/create', component:  CreateTableComponent},
-  { path: 'tables/add', component:  AddTableComponent}
+  { path: 'tables/add', component:  AddTableComponent},
+  { path: 'products', component:  AllProductsComponent}
 ];
 
 @NgModule({

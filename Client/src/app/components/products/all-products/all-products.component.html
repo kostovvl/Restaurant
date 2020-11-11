@@ -1,0 +1,5 @@
+<p>All Products</p>
+<div *ngFor= "let product of allProducts$ | async" >
+    <p>{{product.name}} , price: {{product.price}}, category: {{product.categoryName}}</p>
+    <p>////////////////////////</p>
+</div>
