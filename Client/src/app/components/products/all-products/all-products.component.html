@@ -5,8 +5,21 @@
   <div class="form-group" [routerLink]= "['/products/create/product']">
     <button type="submit" class="btn btn-primary btn-block"> Create Product </button>
   </div>
+
+  <p>All Categories</p>
+<div *ngFor= "let category of allCategories$ | async" >
+    <p>{{category.name}} </p>
+      <div class="form-group" (click) = deleteCategory(category.id) >
+      <button type="submit" class="btn btn-primary btn-block"> Delete </button>
+    </div>
+    <p>////////////////////////</p>
+</div>
+
 <p>All Products</p>
 <div *ngFor= "let product of allProducts$ | async" >
     <p>{{product.name}} , price: {{product.price}}, category: {{product.categoryName}}</p>
+    <div class="form-group" (click) = deleteProduct(product.id) >
+      <button type="submit" class="btn btn-primary btn-block"> Delete </button>
+    </div>
     <p>////////////////////////</p>
 </div>

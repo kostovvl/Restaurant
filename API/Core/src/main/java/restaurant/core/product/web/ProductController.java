@@ -56,11 +56,12 @@ public class ProductController {
     }
 
     //todo preauthorize for admin
+    @CrossOrigin(origins = "http://localhost:4200/")
     @DeleteMapping("/delete/{productId}")
     public ResponseEntity<String> deleteProduct(@PathVariable(name = "productId") long productId) {
         String productName = this.productService.deleteProduct(productId);
 
-        return new ResponseEntity<>(String.format(Global.Product_Deleted_Message, productName), HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     //**********Exception Handlers*************//

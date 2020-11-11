@@ -8,10 +8,13 @@ import Category from '../model/category.model';
 })
 export class ProductsService {
 
+  
+  private readonly create_category_url = 'http://localhost:8080/categories/add';
+  private readonly delete_category_url = 'http://localhost:8080/categories/delete/';
+  private readonly create_product_url = 'http://localhost:8080/products/add';
+  private readonly delete_product_url = 'http://localhost:8080/products/delete/';
   private readonly get_all_products_url = 'http://localhost:8080/products/all';
   private readonly get_all_categories_url = 'http://localhost:8080/categories/all';
-  private readonly create_category_url = 'http://localhost:8080/categories/add';
-  private readonly create_product_url = 'http://localhost:8080/products/add';
 
   constructor(private http: HttpClient) { }
 
@@ -19,8 +22,16 @@ export class ProductsService {
     return this.http.post(this.create_category_url, form)
   }
 
+  deleteCategory(id: number) {
+    return this.http.delete(this.delete_category_url + id);
+  }
+
   createProduct(form: Object) {
     return this.http.post(this.create_product_url, form)
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(this.delete_product_url + id);
   }
 
   getAllProducts() {

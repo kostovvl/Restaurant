@@ -43,11 +43,12 @@ public class CategoryController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200/")
     @DeleteMapping("/delete/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable(name = "categoryId") long categoryId) {
         String categoryName = this.productCategoryService.deleteCategory(categoryId);
 
-        return new ResponseEntity<>(String.format(Global.Category_Deleted_Message, categoryName), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler({PersistenceException.class, TransactionException.class})
