@@ -1,3 +1,7 @@
+<div class="form-group" [routerLink]= "['/bills/create']">
+  <button type="submit" class="btn btn-primary btn-block"> New </button>
+</div>
+
 <div *ngFof="let bill of allBills$ | async">
   <p>table: {{bill.tableNumber}}, price: {{bill.totalPrice}}</p>
   <div class="form-group" [routerLink]= "['/bills/details/', bill.id]">

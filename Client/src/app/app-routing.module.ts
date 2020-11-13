@@ -9,6 +9,7 @@ import { AllProductsComponent } from 'src/app/components/products/all-products/a
 import { CreateCategoryComponent } from 'src/app/components/products/create-category/create-category.component';
 import { CreateProductComponent } from 'src/app/components/products/create-product/create-product.component';
 import { BillDetailsComponent } from 'src/app/components/bills/bill-details/bill-details.component';
+import { CreateBillComponent } from 'src/app/components/bills/create-bill/create-bill.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'bills', component: AllBillsComponent },
   { path: 'bills/details/:id', component: BillDetailsComponent },
+  { path: 'bills/create', component: CreateBillComponent },
   { path: 'tables/create', component:  CreateTableComponent},
   { path: 'tables/add', component:  AddTableComponent},
   { path: 'products', component:  AllProductsComponent}, 
