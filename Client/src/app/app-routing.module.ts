@@ -8,12 +8,15 @@ import { AddTableComponent } from 'src/app/components/tables/add-table/add-table
 import { AllProductsComponent } from 'src/app/components/products/all-products/all-products.component';
 import { CreateCategoryComponent } from 'src/app/components/products/create-category/create-category.component';
 import { CreateProductComponent } from 'src/app/components/products/create-product/create-product.component';
+import { BillDetailsComponent } from 'src/app/components/bills/bill-details/bill-details.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'bills', component: AllBillsComponent },
+  { path: 'bills/details/:id', component: BillDetailsComponent },
   { path: 'tables/create', component:  CreateTableComponent},
   { path: 'tables/add', component:  AddTableComponent},
   { path: 'products', component:  AllProductsComponent}, 

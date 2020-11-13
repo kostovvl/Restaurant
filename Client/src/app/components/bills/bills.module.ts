@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BillDetailsComponent } from './bill-details/bill-details.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [BillDetailsComponent],
   imports: [
     CommonModule
   ]

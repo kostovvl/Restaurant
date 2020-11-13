@@ -51,6 +51,13 @@ public class BillController {
         return new ResponseEntity<>(this.billService.getBillsByTableAndWaiter(tableId, waiterId), HttpStatus.OK);
     }
 
+    @GetMapping("/get/details/{billId}")
+    public ResponseEntity<BillDto> getDetails(@PathVariable(name = "billId") long billId) {
+        BillDto result = this.billService.findById(billId);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     //*** End of Get Bill Methods ***//
 
     @PutMapping("/add/product/{billId}")

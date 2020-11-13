@@ -151,11 +151,15 @@ public class BillService {
         BillDto result = new BillDto();
         result.setId(bill.getId());
         result.setWaiterId(bill.getWaiter().getId());
+
         if (bill.getTable() == null) {
             result.setTableId(0);
+            result.setTableNumber(0);
         } else {
         result.setTableId(bill.getTable().getId());
+        result.setTableNumber(bill.getTable().getNumber());
         }
+
         result.setProducts(bill.getProducts());
         result.setProductPrices(calculatePrices(bill.getProducts()));
         result.setTotalPrice(bill.getTotalPrice());

@@ -1,6 +1,5 @@
 package restaurant.core.bill.domain;
 import restaurant.core.configuration.BaseDto;
-import restaurant.core.product.domain.product.ProductDto;
 
 import java.util.Map;
 
@@ -8,6 +7,7 @@ public class BillDto extends BaseDto {
 
     private long waiterId;
     private long tableId;
+    private long tableNumber;
     private Map<Long, Integer> products;
     private Map<Long, Double> productPrices;
     private double totalPrice;
@@ -53,5 +53,13 @@ public class BillDto extends BaseDto {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public long getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(long tableNumber) {
+        this.tableNumber = tableNumber;
     }
 }
