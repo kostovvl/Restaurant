@@ -1,8 +1,14 @@
-<div class="form-group" [routerLink]= "['/bills/create']">
-  <button type="submit" class="btn btn-primary btn-block"> New </button>
+<form [formGroup] = "form" (submit) = create()> 
+  <select class="form-control" formControlName = "table" >
+    <option value="{{table.id}}" *ngFor="let table of allTables$ | async" >{{table.number}}</option>
+  </select>
+  <div class="alert alert-danger" *ngIf="f.table.errors?.required && f.table.touched" >
+    This field is required
 </div>
+  <button type="submit" class="btn btn-primary btn-block"> New </button>
+</form>
 
-<div *ngFof="let bill of allBills$ | async">
+<div *ngFor="let bill of allBills$ | async">
   <p>table: {{bill.tableNumber}}, price: {{bill.totalPrice}}</p>
   <div class="form-group" [routerLink]= "['/bills/details/', bill.id]">
     <button type="submit" class="btn btn-primary btn-block"> Details </button>

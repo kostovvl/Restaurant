@@ -64,6 +64,8 @@ public class BillService {
 
     public List<BillDto> getBillsByWaiter(long waiterId) {
 
+        System.out.println();
+
         return  this.billRepository.findByWaiterId(waiterId)
                 .stream()
                 .map(this::mapBill)
@@ -168,6 +170,10 @@ public class BillService {
 
     private Map<Long, Double> calculatePrices(Map<Long, Integer> products) {
         Map<Long, Double> result = new HashMap<>();
+
+        if (products.size() == 0) {
+            return  result;
+        }
 
         for (Map.Entry<Long, Integer> product : products.entrySet()) {
             Long id = product.getKey();
