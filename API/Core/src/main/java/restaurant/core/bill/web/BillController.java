@@ -60,13 +60,15 @@ public class BillController {
 
     //*** End of Get Bill Methods ***//
 
-    @PutMapping("/add/product/{billId}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/add/product/{billId}/{productId}/{quantity}")
     public ResponseEntity<?> addProduct(@PathVariable(name = "billId") long billId,
-                                        @RequestBody Map<Long, Integer> products) {
+                                        @PathVariable(name = "productId") long productId,
+                                        @PathVariable(name = "quantity") int quantity) {
 
-        this.billService.addProduct(billId, products);
+        this.billService.addProduct(billId, productId, quantity);
 
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/product/{billId}/{productId}")

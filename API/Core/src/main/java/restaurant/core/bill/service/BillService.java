@@ -111,18 +111,15 @@ public class BillService {
 
     //**** Finish of Get Bill Methods ****//
 
-    public void addProduct(long billId, Map<Long, Integer> products) {
+    public void addProduct(long billId, long productId, int quantity) {
         Bill bill = this.billRepository.getOne(billId);
-        for (Map.Entry<Long, Integer> product : products.entrySet()) {
-            long id = product.getKey();
-            int quantity = product.getValue();
 
-            double price = this.productRepository.findById(id).orElse(null).getPrice() * quantity;
+            double price = this.productRepository.findById(productId).orElse(null).getPrice() * quantity;
 
-            bill.addProduct(id, quantity);
+            bill.addProduct(productId, quantity);
             bill.addToTotalPrice(price);
 
-        }
+
 
         this.billRepository.saveAndFlush(bill);
 

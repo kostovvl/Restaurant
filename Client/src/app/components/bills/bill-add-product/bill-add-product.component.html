@@ -1,1 +1,14 @@
-<p>bill-add-product works!</p>
+<form [formGroup] = "form" (submit) = add()> 
+    <select class="form-control" formControlName = "product" >
+      <option value="{{product.id}}" *ngFor="let product of allProducts$ | async" >{{product.name}}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="f.product.errors?.required && f.product.touched" >
+      This field is required
+  </div>
+  <input class="form-control" placeholder="number" formControlName = "quantity">
+  <div class="alert alert-danger" *ngIf="f.quantity.errors?.required && f.quantity.touched" >
+    This field is required
+</div>
+    <button type="submit" class="btn btn-primary btn-block"> New </button>
+  </form>
+  

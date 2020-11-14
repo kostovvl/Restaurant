@@ -10,10 +10,10 @@
 
 <div *ngFor="let bill of allBills$ | async">
   <p>table: {{bill.tableNumber}}, price: {{bill.totalPrice}}</p>
-  <div class="form-group" [routerLink]= "['/bills/details/', bill.id]">
+  <div class="form-group" [routerLink]= "['/bills/details/', bill.id]" routerLinkActive="active">
     <button type="submit" class="btn btn-primary btn-block"> Details </button>
   </div>
-  <div class="form-group" [routerLink]= "['/bills/add/product/', bill.id]">
+  <div class="form-group" [routerLink]= "['/bills/add/product/', bill.id]" routerLinkActive="active">
     <button type="submit" class="btn btn-primary btn-block"> Add Product </button>
   </div>
 </div>

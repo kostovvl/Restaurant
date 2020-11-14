@@ -5,6 +5,7 @@ import { BillAddProductComponent } from './bill-add-product/bill-add-product.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AllBillsComponent } from './all-bills/all-bills.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { AllBillsComponent } from './all-bills/all-bills.component';
   imports: [
     BrowserModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class BillsModule { }
