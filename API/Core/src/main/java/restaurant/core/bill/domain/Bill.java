@@ -4,6 +4,7 @@ import restaurant.core.table.domain.TableEntity;
 import restaurant.core.user.domain.userEntity.UserEntity;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -17,6 +18,7 @@ public class Bill extends BaseEntity {
     private double totalPrice;
 
     public Bill() {
+        this.products = new HashMap<>();
     }
 
     @ManyToOne()

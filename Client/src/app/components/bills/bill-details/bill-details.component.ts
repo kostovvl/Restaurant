@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BillsService } from 'src/app/core/service/bills.service';
+
+import Bill from 'src/app/core/model/bill.model';
 
 @Component({
   selector: 'app-bill-details',
@@ -7,9 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillDetailsComponent implements OnInit {
 
-  constructor() { }
+  bill: Bill;
+
+  constructor(
+    private route: ActivatedRoute,
+    private billsService: BillsService
+  ) { }
 
   ngOnInit(): void {
+    let billId = this.route.snapshot.params['id'];
+    this.billsService.getDetails(billId)
+    .subscribe(data => {
+      this.bill = data;
+      console.log(this.bill)
+    })
+  }
+
+  getName(productId: number, products: Map<number, string>) {
+    return products.get(productId);
+  }
+
+  remove(productId: number) {
+    let billId  = this.bill.id;
+    this.billsService.removeProduct(billId, productId)
+    .subscribe(data => {
+      this.ngOnInit()
+    })
   }
 
 }

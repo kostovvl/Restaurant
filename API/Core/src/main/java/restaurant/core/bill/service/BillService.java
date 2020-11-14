@@ -161,9 +161,11 @@ public class BillService {
 
         result.setProducts(bill.getProducts());
         result.setProductPrices(calculatePrices(bill.getProducts()));
+        result.setProductNames(mapProductNames(bill.getProducts()));
         result.setTotalPrice(bill.getTotalPrice());
         return result;
     }
+
 
     private Map<Long, Double> calculatePrices(Map<Long, Integer> products) {
         Map<Long, Double> result = new HashMap<>();
@@ -179,6 +181,20 @@ public class BillService {
         }
         return result;
     }
+
+    private Map<Long, String> mapProductNames(Map<Long, Integer> products) {
+
+        Map<Long, String> result = new HashMap<>();
+
+        for (Map.Entry<Long, Integer> product : products.entrySet()) {
+            String name = this.productRepository.findById(product.getKey()).orElse(null).getName();
+            result.put(product.getKey(), name);
+        }
+
+        return result;
+
+    }
+
 
 
 }

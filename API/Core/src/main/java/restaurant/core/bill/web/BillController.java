@@ -71,13 +71,14 @@ public class BillController {
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/delete/product/{billId}/{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable(name = "billId") long billId,
                                         @PathVariable(name = "productId") long productId) {
 
         this.billService.deleteProduct(billId, productId);
 
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     @PutMapping("/close/{billId}")
