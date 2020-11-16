@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import restaurant.core.bill.domain.Bill;
 import restaurant.core.bill.domain.BillDto;
+import restaurant.core.bill.domain.ProductInfoDto;
 import restaurant.core.bill.repository.BillRepository;
 import restaurant.core.product.domain.product.Product;
 import restaurant.core.product.domain.product.ProductDto;
@@ -159,16 +160,13 @@ public class BillService {
         result.setTableNumber(bill.getTable().getNumber());
         }
 
-        result.setProducts(bill.getProducts());
-        result.setProductPrices(calculatePrices(bill.getProducts()));
-        result.setProductNames(mapProductNames(bill.getProducts()));
+        result.setProducts(mapProducts(bill.getProducts()));
         result.setTotalPrice(bill.getTotalPrice());
         return result;
     }
 
-
-    private Map<Long, Double> calculatePrices(Map<Long, Integer> products) {
-        Map<Long, Double> result = new HashMap<>();
+    private Map<Long, ProductInfoDto> mapProducts(Map<Long, Integer> products) {
+        Map<Long, ProductInfoDto> result = new HashMap<>();
 
         if (products.size() == 0) {
             return  result;
@@ -176,25 +174,16 @@ public class BillService {
 
         for (Map.Entry<Long, Integer> product : products.entrySet()) {
             Long id = product.getKey();
-            double price = this.productRepository.findById(id).orElse(null).getPrice() * product.getValue();
-            result.put(id, price);
-        }
-        return result;
-    }
 
-    private Map<Long, String> mapProductNames(Map<Long, Integer> products) {
+            Product existing = this.productRepository.findById(id).orElse(null);
+           ProductInfoDto mapped = new ProductInfoDto();
+           mapped.setId(id);
+           mapped.setName(existing.getName());
+           mapped.setPrice(existing.getPrice() * product.getValue());
 
-        Map<Long, String> result = new HashMap<>();
-
-        for (Map.Entry<Long, Integer> product : products.entrySet()) {
-            String name = this.productRepository.findById(product.getKey()).orElse(null).getName();
-            result.put(product.getKey(), name);
+           result.put(id, mapped);
         }
 
         return result;
-
     }
-
-
-
 }

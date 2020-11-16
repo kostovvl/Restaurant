@@ -8,9 +8,7 @@ public class BillDto extends BaseDto {
     private long waiterId;
     private long tableId;
     private long tableNumber;
-    private Map<Long, Integer> products;
-    private Map<Long, Double> productPrices;
-    private Map<Long, String> productNames;
+    private Map<Long, ProductInfoDto> products;
     private double totalPrice;
 
     public BillDto() {
@@ -32,28 +30,12 @@ public class BillDto extends BaseDto {
         this.tableId = tableId;
     }
 
-    public Map<Long, Integer> getProducts() {
+    public Map<Long, ProductInfoDto> getProducts() {
         return products;
     }
 
-    public void setProducts(Map<Long, Integer> products) {
+    public void setProducts(Map<Long, ProductInfoDto> products) {
         this.products = products;
-    }
-
-    public Map<Long, Double> getProductPrices() {
-        return productPrices;
-    }
-
-    public void setProductPrices(Map<Long, Double> productPrices) {
-        this.productPrices = productPrices;
-    }
-
-    public Map<Long, String> getProductNames() {
-        return productNames;
-    }
-
-    public void setProductNames(Map<Long, String> productNames) {
-        this.productNames = productNames;
     }
 
     public double getTotalPrice() {
