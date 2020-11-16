@@ -23,7 +23,6 @@ export class BillDetailsComponent implements OnInit {
     this.billsService.getDetails(billId)
     .subscribe(data => {
       this.bill = data;
-      console.log(this.bill)
     })
   }
 

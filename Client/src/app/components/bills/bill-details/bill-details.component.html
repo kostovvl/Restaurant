@@ -7,13 +7,12 @@
     <th>Price</th>
     <th>Action</th>
   </tr>
-  <tr>
-        <td *ngFor="let product of bill.productNames | keyvalue" >{{product.value}}</td>
-        <td *ngFor="let productQuantity of bill.products | keyvalue" >{{productQuantity.value}}</td>
-        <td *ngFor="let productPrice of bill.productPrices | keyvalue">{{productPrice.value}}</td>
+  <tr *ngFor="let product of bill.products | keyvalue" >
+        <td>{{product.value.name}}</td>
+        <td>{{product.key}}</td>
+        <td>{{product.value.price}}</td>
         <td><button type="submit" class="btn btn-primary btn-block"
-            *ngFor="let productPrice of bill.productPrices | keyvalue"
-            (click) = remove(productPrice.key) > Remove </button>
+            (click) = remove(product.value.id) > Remove </button> </td>
   </tr>
 
 
