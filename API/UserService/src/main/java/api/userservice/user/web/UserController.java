@@ -44,25 +44,6 @@ public class UserController {
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 
-//    @CrossOrigin(origins = "http://localhost:4200")
-//    @PutMapping("/add_table/{waiterId}/{tableId}")
-//    public ResponseEntity<String> addTableToWaiter(@PathVariable(name = "waiterId") long waiterId,
-//                                                   @PathVariable(name = "tableId") long tableId) {
-//
-//        String waiterName = this.userEntityService.addTableToWaiter(waiterId, tableId);
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @PutMapping("/remove_table/{waiterId}/{tableId}")
-//    public ResponseEntity<String> removeTableFromWaiter(@PathVariable(name = "waiterId") long waiterId,
-//                                                        @PathVariable(name = "tableId") long tableId) {
-//
-//        String waiterName = this.userEntityService.removeTableFromWaiter(waiterId, tableId);
-//
-//        return new ResponseEntity<>(String.format(Global.Table_Removed_To_Waiter_Message, tableId, waiterName),
-//                HttpStatus.OK);
-//    }
 
     //********** Error Handlers **********//
 

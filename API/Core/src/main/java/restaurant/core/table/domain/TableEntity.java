@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class TableEntity extends BaseEntity {
 
     private int number;
-    private UserEntity waiter;
+    private long waiterId;
 
     public TableEntity() {
     }
@@ -28,13 +28,12 @@ public class TableEntity extends BaseEntity {
         this.number = number;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "waiter_id", referencedColumnName = "id")
-    public UserEntity getWaiter() {
-        return waiter;
+    @Column(name = "waiter_id")
+    public long getWaiterId() {
+        return waiterId;
     }
 
-    public void setWaiter(UserEntity waiter) {
-        this.waiter = waiter;
+    public void setWaiterId(long waiterId) {
+        this.waiterId = waiterId;
     }
 }

@@ -62,29 +62,29 @@ public class UserEntityService {
                 .orElse(null);
     }
 
-    public String addTableToWaiter(long waiterId, long tableId) {
-        TableEntity tableEntity = this.tableRepository.getOne(tableId);
-        UserEntity waiter = this.userEntityRepository.getOne(waiterId);
-
-        tableEntity.setWaiter(waiter);
-
-        this.tableRepository.saveAndFlush(tableEntity);
-
-        return waiter.getName();
-    }
-
-
-
-    public String removeTableFromWaiter(long waiterId, long tableId) {
-        TableEntity tableEntity = this.tableRepository.getOne(tableId);
-        UserEntity waiter = this.userEntityRepository.getOne(waiterId);
-
-        tableEntity.setWaiter(null);
-
-        this.tableRepository.saveAndFlush(tableEntity);
-
-        return waiter.getName();
-    }
+//    public String addTableToWaiter(long waiterId, long tableId) {
+//        TableEntity tableEntity = this.tableRepository.getOne(tableId);
+//        UserEntity waiter = this.userEntityRepository.getOne(waiterId);
+//
+//        tableEntity.setWaiter(waiter);
+//
+//        this.tableRepository.saveAndFlush(tableEntity);
+//
+//        return waiter.getName();
+//    }
+//
+//
+//
+//    public String removeTableFromWaiter(long waiterId, long tableId) {
+//        TableEntity tableEntity = this.tableRepository.getOne(tableId);
+//        UserEntity waiter = this.userEntityRepository.getOne(waiterId);
+//
+//        tableEntity.setWaiter(null);
+//
+//        this.tableRepository.saveAndFlush(tableEntity);
+//
+//        return waiter.getName();
+//    }
 
     public List<UserEntityDto> getAllWaiters() {
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,21 @@ public class TableService {
                 .map(t -> this.mapper.map(t, TableEntityDto.class))
                 .collect(Collectors.toList());
     }
+
+    public void addWaiter(long waiterId, long tableId) {
+        TableEntity table = this.tableRepository.getOne(tableId);
+        table.setWaiterId(waiterId);
+
+        this.tableRepository.saveAndFlush(table);
+    }
+
+    public void removeWaiter(long tableId) {
+        TableEntity table = this.tableRepository.getOne(tableId);
+        table.setWaiterId(0);
+
+        this.tableRepository.saveAndFlush(table);
+    }
+
 
 
     //********** Private methods ***********//

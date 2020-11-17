@@ -14,7 +14,7 @@ public interface TableRepository extends JpaRepository<TableEntity, Long> {
 
     Optional<TableEntity> findByNumber(int number);
 
-    @Query("select t from TableEntity as t where t.waiter is null")
+    @Query("select t from TableEntity as t where t.waiterId = 0")
     List<TableEntity> getAllFreeTables();
 
 }
