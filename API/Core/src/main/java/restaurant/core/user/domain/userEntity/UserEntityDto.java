@@ -1,7 +1,6 @@
 package restaurant.core.user.domain.userEntity;
 
 import restaurant.core.configuration.BaseDto;
-import restaurant.core.user.domain.userEntiryRole.UserEntityRoleDto;
 
 import java.util.Set;
 

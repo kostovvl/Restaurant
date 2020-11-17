@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/waiters")
 public class UserController {
 
 
@@ -24,7 +24,6 @@ public class UserController {
     public UserController(DiscoveryClient discoveryClient, RestTemplate restTemplate) {
         this.discoveryClient = discoveryClient;
         this.restTemplate = restTemplate;
-
     }
 
 
