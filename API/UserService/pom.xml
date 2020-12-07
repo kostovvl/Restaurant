@@ -58,7 +58,16 @@
             <artifactId>modelmapper</artifactId>
             <version>2.3.2</version>
         </dependency>
-
+        <!--       Dependencies for config client from here...-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!--....to here-->
     </dependencies>
 
     <dependencyManagement>
