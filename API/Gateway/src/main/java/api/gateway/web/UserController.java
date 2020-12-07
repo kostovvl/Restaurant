@@ -2,7 +2,9 @@ package api.gateway.web;
 
 import api.gateway.domain.UserContainer;
 import api.gateway.domain.UserEntityDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/waiters")
+@RefreshScope
 public class UserController {
 
 
@@ -21,10 +24,13 @@ public class UserController {
     private final RestTemplate restTemplate;
     private URI userServiceUri;
 
+
     public UserController(DiscoveryClient discoveryClient, RestTemplate restTemplate) {
         this.discoveryClient = discoveryClient;
         this.restTemplate = restTemplate;
     }
+
+
 
 
     @PostMapping("/add")

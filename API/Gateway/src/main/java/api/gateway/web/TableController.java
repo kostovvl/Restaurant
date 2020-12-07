@@ -3,6 +3,7 @@ package api.gateway.web;
 import api.gateway.domain.TableContainer;
 import api.gateway.domain.TableEntityDto;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
