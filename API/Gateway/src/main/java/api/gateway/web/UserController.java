@@ -23,14 +23,21 @@ public class UserController {
     private final DiscoveryClient discoveryClient;
     private final RestTemplate restTemplate;
     private URI userServiceUri;
+    private final String testVariable;
 
 
-    public UserController(DiscoveryClient discoveryClient, RestTemplate restTemplate) {
+    public UserController(DiscoveryClient discoveryClient, RestTemplate restTemplate,
+                          @Value("${test}") String testVariable) {
         this.discoveryClient = discoveryClient;
         this.restTemplate = restTemplate;
+        this.testVariable = testVariable;
     }
 
 
+    @GetMapping("/test")
+    String test() {
+        return testVariable;
+    }
 
 
     @PostMapping("/add")
